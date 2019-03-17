@@ -16,7 +16,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 /**
- * Panel which have basic options to choose: Age, Height, Weight, Activity, Gender, BMR formula
+ * Panel which has basic options to choose: Age, Height, Weight, Activity, Gender, BMR formula
  */
 public class CalcPanel extends JPanel implements ActionListener {
 
