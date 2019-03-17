@@ -5,13 +5,18 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+
+/**
+ * A class whose object is responsible for performing BMR, TDEE calculations and macronutrient consumption
+ */
 public class Calculator {
 	private Person p;
 	private double bmr, tdee;
-	private String[][] macrosValue = new String[3][4];
-	private String[] diets = new String[] { "Moderate Carb 30/35/35", "Lower Carb 40/40/20", "Higher Carb 30/20/50" };
+	private String[][] macrosValue = new String[3][4]; // An array of macronutrients for three different diets
+	private String[] diets = new String[] { "Moderate Carb 30/35/35", "Lower Carb 40/40/20", "Higher Carb 30/20/50" }; //Table's titles
 
-	private static final Map<String, Double> hashActivity;
+	/** Defined map with possible person's activity and assigned coefficients used to calculate BMR and TDEE **/
+	 private static final Map<String, Double> hashActivity;
 	static {
 		hashActivity = new HashMap<>();
 		hashActivity.put("Lack of physical activity", 1.2);
@@ -27,6 +32,11 @@ public class Calculator {
 
 	}
 
+	/**
+	 *
+	 * @param index - the type of method that should be used to calculate the BMR (Mifflin / Harris), and then calculates Tdee and macros
+	 *
+	 */
 	public void calculateStats(int index) {
 		if (index == 0) {
 			calculateHarrisBMR();
@@ -38,6 +48,11 @@ public class Calculator {
 
 	}
 
+	/**
+	 *
+	 * @return BMR calculated with Harris method.
+	 *
+	 */
 	public double calculateHarrisBMR() {
 		if (p.getGender() == Gender.MALE) {
 			bmr = 66.5 + 13.75 * p.getWeight() + 5.003 * p.getHeight() - 6.755 * p.getAge();
@@ -48,6 +63,17 @@ public class Calculator {
 
 	}
 
+
+	/**
+	 *
+	 * @return BMR calculated with Mifflin method
+	 * For men: (10 x w) + (6.25 x h) - (5 x a) + 5
+	 * For women:(10 x w) + (6.25 x h) - (5 x a) - 161
+	 * Where:
+	 * w = weight in kg (1 pound = 0.45359237 kilograms)
+	 * h = height in cm (1 inch = 2.54 centimeters)
+	 * a = age (in years)
+	 */
 	public double calculateMifflinBMR() {
 		bmr = 10.0 * p.getWeight() + 6.25 * p.getHeight() - 5.0 * p.getAge();
 		if (p.getGender() == Gender.MALE) {
@@ -58,6 +84,10 @@ public class Calculator {
 		return bmr;
 	}
 
+	/**
+	 *
+	 * @return Tdee calculation
+	 */
 	public double calculateTDEE() {
 		tdee = bmr * getHashActivity(p.getActivity());
 		return tdee;
@@ -68,6 +98,10 @@ public class Calculator {
 		return hashActivity.get(activity);
 	}
 
+	/**
+	 *
+	 * @return An array with the breakdown of proteins, fats and carbohydrates depending on the diet (Moderate Carb 30/35/35, Lower Carb 40/40/20, Higher Carb 30/20/50)
+	 */
 	public String[][] calculateMacronutrients() {
 		double[][] proportions = new double[][] { { 0.3, 0.35, 0.35 }, { 0.4, 0.4, 0.2 }, { 0.3, 0.2, 0.5 } };
 		int[] caloriesPerGram = new int[] { 4, 9, 4 };

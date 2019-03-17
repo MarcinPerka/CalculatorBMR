@@ -6,6 +6,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 
+
+/**
+ * Frame which shows results(BMR, TDEE and macros) with some basic descriptions.
+ */
 public class StatsFrame extends JFrame{
 
     private String[] columnNames = {"Diet","Protein",
@@ -75,6 +79,7 @@ public class StatsFrame extends JFrame{
         setTableDesign(table);
 
     }
+
 
     public static void setTableDesign(JTable table){
         int[] widths = {205,65,65,65};

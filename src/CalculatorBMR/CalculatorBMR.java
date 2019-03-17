@@ -6,6 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+/**
+ * @author Marcin Perka
+ * @version 1.0
+ * @since 2019-03-17
+ * App which caluclates BMR, TDEE and macronutrients to maintain the weight at the current level.
+ * BMR - Basal Metabolic Rate
+ * TDEE - Total Daily Energy Expenditure
+ */
 public class CalculatorBMR {
 	
 	/**
@@ -23,6 +32,9 @@ public class CalculatorBMR {
 		});
 	}
 
+	/**
+	 * Creates frame with panel which have basic options to choose: Age, Height, Weight, Activity, Gender, BMR formula
+	 */
 	private static void createAndShowGui() {
 		JFrame frame = new JFrame();
 		JPanel calcPanel= new CalcPanel();
@@ -31,7 +43,7 @@ public class CalculatorBMR {
 		frame.setTitle("Calculator");
 		frame.setResizable(false);
 		frame.setForeground(Color.WHITE);
-		frame.setBounds(100, 100, 290, 300);
+		frame.setBounds(200, 200, 290, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
